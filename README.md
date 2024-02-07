@@ -5,9 +5,9 @@
 store the gameboard as an array  
 create method to get the array  
 create method to add user move to gameboard (x or o)  
-&ensp;checks to make sure move is valid  
+&emsp;checks to make sure move is valid  
 create method to print gameboard to console so we can see what is happening  
-&ensp;will be removed later  
+&emsp;will be removed later  
 
   
 ### module for game controller  
