@@ -1,6 +1,6 @@
 # Odin Project tic tac toe game  
   
-## **Psuedocode**  
+## *Psuedocode*  
 ## Game itself
 ### module for game board  
 store the board as an array  
