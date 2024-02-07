@@ -17,10 +17,10 @@ return the 3 methods
   
 ### factory for Cell update methods  
 represents one cell on the game board  
-can have one of three:  
-&emsp;> 0: no x or o  
-&emsp;> 1: x  
-&emsp;> 2: o  
+&emsp;can have one of three:  
+&emsp;&emsp;> 0: no x or o  
+&emsp;&emsp;> 1: x  
+&emsp;&emsp;> 2: o  
 initialize variable for value  
 create method to make the move  
 create method to get the move  
