@@ -4,9 +4,9 @@
 ## Game itself
 ### module for game board  
 store the board as an array  
-&emsp;>initialize the rows and columns variables for the board
-&emsp;>initialize board array as empty
-&emsp;>push Cell object to array making 2d array
+&emsp;>initialize the rows and columns variables for the board  
+&emsp;>initialize board array as empty  
+&emsp;>push Cell object to array making 2d array  
 create method to get the array  
 create method to add user move to gameboard (x or o)  
 &emsp;>checks to make sure move is valid  
