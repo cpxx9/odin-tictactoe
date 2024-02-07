@@ -4,7 +4,7 @@
 ## Game itself
 ### module for game board  
 store the board as an array  
-&emsp;>initialize the rows and columns variables for the board
+> initialize the rows and columns variables for the board
 &emsp;>initialize board array as empty
 &emsp;>push Cell object to array making 2d array
 create method to get the array  
