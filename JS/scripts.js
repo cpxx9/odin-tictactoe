@@ -69,6 +69,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const _board = gameBoardModule();
   
   // create array of player objects
+  //  each player has a value for their marker (x or o)
   const players = [
     {
       _name: playerOneName,
@@ -79,26 +80,46 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       _marker: 2
     }
   ];
-  //  each player has a value for their marker (x or o)
+  
   // set the active player to random player in the array
-
+  let _activePlayer = players[Math.floor(Math.random() * 2)];
   // create method to switch the active player
+  const switchPlayerTurn = () => {
+    _activePlayer = _activePlayer === players[0] ? players[1] : players[0];
+  };
 
   // create method to get the active player
+  const getActivePlayer = () => _activePlayer;
 
   // create method to print the new round text
   //  will show whose turn it is
+  const printNewRound = () => {
+    _board.printBoard();
+    console.log(`${getActivePlayer().name}'s turn.`);
+  };
 
   // create method to play the round
-  //  print what player made what move
-  //  store the move in the board with method on the board object
-  //  switch whose turn it is with the switch player method
-  //  print whose turn it is with the print round method
+  const playRound = (row, column) => {
+    //  print what player made what move
+    console.log(`Marking for ${getActivePlayer()._name} in Row: ${row}, Column: ${column}`);
+    //  store the move in the board with method on the board object
+    _board.placeMarker(row, column, getActivePlayer()._marker);
+    //  switch whose turn it is with the switch player method
+    switchPlayerTurn();
+    //  print whose turn it is with the print round method
+    printNewRound();
+  }
 
   // start the game
   //  call the print round method
+  printNewRound();
 
   // return the method to get the active player and the play round method
+  return {
+    getActivePlayer,
+    playRound
+  }
 }
 
 // store the controller object in a variable
+const game = GameControllerModule();
