@@ -53,6 +53,6 @@ return the 2 methods
   
 return the method to get the active player and the play round method  
   
-## store the controller object in a variable
+### store the controller object in a variable
   
 ## DOM integration
