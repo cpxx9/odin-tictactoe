@@ -18,7 +18,10 @@ function gameBoardModule() {
   const getBoard = () => board;
   // create method to add user move to gameboard (x or o)
   //  checks to make sure move is valid
-
+  const makeMove = (playerRow, playerColumn, player) => {
+    let isMoveValid = false;
+    const availableCell = board.filter()
+  }
   // create method to print gameboard to console so we can see what is happening
   //  will be removed later
   
