@@ -76,13 +76,14 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       _marker: 1
     },
     {
-      _name: playerOneName,
+      _name: playerTwoName,
       _marker: 2
     }
   ];
   
   // set the active player to random player in the array
   let _activePlayer = players[Math.floor(Math.random() * 2)];
+  console.log(_activePlayer);
   // create method to switch the active player
   const switchPlayerTurn = () => {
     _activePlayer = _activePlayer === players[0] ? players[1] : players[0];
@@ -95,7 +96,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   //  will show whose turn it is
   const printNewRound = () => {
     _board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.`);
+    console.log(`${getActivePlayer()._name}'s turn.`);
   };
 
   // create method to play the round
