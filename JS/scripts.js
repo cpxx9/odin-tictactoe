@@ -5,24 +5,24 @@ function gameBoardModule() {
   //  initialize board array as empty
   const _rows = 3;
   const _columns = 3;
-  const board = [];
+  const _board = [];
 
   //  >push Cell object to array making 2d array
   for (let i = 0; i < _rows; i++) {
-    board[i] = [];
+    _board[i] = [];
     for (let n = 0; n < _columns; n++) {
-      board[i].push(Cell());
+      _board[i].push(Cell());
     }
   }
   // create method to get the board array
-  const getBoard = () => board;
+  const getBoard = () => _board;
   // create method to add user move to gameboard (x or o)
   //  checks to make sure move is valid
   const placeMarker = (playerRow, playerColumn, player) => {
     let isMoveValid = false;
-    board[playerRow][playerColumn].getValue() === 0 ? isMoveValid = true : isMoveValid = false;
+    _board[playerRow][playerColumn].getValue() === 0 ? isMoveValid = true : isMoveValid = false;
     if(isMoveValid) {
-      board[playerRow][playerColumn].addMarker(player);
+      _board[playerRow][playerColumn].addMarker(player);
     } else {
       return;
     }
@@ -30,8 +30,8 @@ function gameBoardModule() {
   // create method to print gameboard to console so we can see what is happening
   //  will be removed later
   const printBoard = () => {
-    const boardWithMarkerValues = board.map((row) => row.map((cell) => cell.getValue()));
-    console.log(boardWithMarkerValues);
+    const _boardWithMarkerValues = _board.map((row) => row.map((cell) => cell.getValue()));
+    console.log(_boardWithMarkerValues);
   }
   // return the 3 methods
   return {
