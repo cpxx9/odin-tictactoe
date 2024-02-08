@@ -18,15 +18,27 @@ function gameBoardModule() {
   const getBoard = () => board;
   // create method to add user move to gameboard (x or o)
   //  checks to make sure move is valid
-  const makeMove = (playerRow, playerColumn, player) => {
+  const placeMarker = (playerRow, playerColumn, player) => {
     let isMoveValid = false;
-    const availableCell = board.filter()
+    board[playerRow][playerColumn].getValue() === 0 ? isMoveValid = true : isMoveValid = false;
+    if(isMoveValid) {
+      board[playerRow][playerColumn].addMarker(player);
+    } else {
+      return;
+    }
   }
   // create method to print gameboard to console so we can see what is happening
   //  will be removed later
-  
+  const printBoard = () => {
+    const boardWithMarkerValues = board.map((row) => row.map((cell) => cell.getValue()));
+    console.log(boardWithMarkerValues);
+  }
   // return the 3 methods
-  
+  return {
+    getBoard,
+    placeMarker,
+    printBoard
+  }
 }
 
 // factory for Cell update methods
@@ -36,21 +48,24 @@ function gameBoardModule() {
 //    1: x player
 //    2: o player
 function Cell() { 
-  // initialize variable for game team value
+  // initialize variable for marker value
   let value = 0;
   // create method to make the move based on the player calling it
-  const changeValue = (player) => value = player;
+  const addMarker = (player) => value = player;
   // create method to get the move
   const getValue = () => value;
   // return the 2 methods
   return {
-    changeValue,
+    addMarker,
     getValue
   };
 }
 
 // module for game controller
 // Takes two players as parameters
+function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
+  
+}
 //  controls flow and state of game turns
 // initialize board to gameboard module
 // create array of player objects
