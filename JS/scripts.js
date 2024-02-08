@@ -67,7 +67,7 @@ function Cell() {
 function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
   // initialize board to gameboard module
   const _board = gameBoardModule();
-  
+  let isWinner = false;
   // create array of player objects
   //  each player has a value for their marker (x or o)
   const players = [
@@ -105,9 +105,9 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     console.log(`Marking for ${getActivePlayer()._name} in Row: ${row}, Column: ${column}`);
     //  store the move in the board with method on the board object
     _board.placeMarker(row, column, getActivePlayer()._marker);
-    //  switch whose turn it is with the switch player method
+    
+    //  check if there is a winner, if not switch whose turn it is with the switch player method
     switchPlayerTurn();
-    //  print whose turn it is with the print round method
     printNewRound();
   }
 
