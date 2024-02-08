@@ -30,11 +30,29 @@ return the 2 methods
 ### module for game controller  
 **Takes two players as parameters**  
 &emsp;>controls flow and state of game turns  
-**Initialize board to gameboard**  
+**initialize board to gameboard module**  
 **create array of player objects**  
-&emsp;>each player has a value for their marker (x or o)
-
-### factory for creating players  
-
+&emsp;>each player has a value for their marker (x or o)  
+**set the active player to random player in the array**  
+  
+**create method to switch the active player**  
+  
+**create method to get the active player**  
+  
+**create method to print the new round text**  
+&emsp;>will show whose turn it is  
+  
+**create method to play the round**  
+&emsp;>print what player made what move  
+&emsp;>store the move in the board with method on the board object  
+&emsp;>switch whose turn it is with the switch player method  
+&emsp;>print whose turn it is with the print round method
+  
+**start the game**  
+&emsp;>call the print round method  
+  
+return the method to get the active player and the play round method  
+  
+## store the controller object in a variable
   
 ## DOM integration
