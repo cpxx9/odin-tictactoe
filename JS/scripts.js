@@ -49,11 +49,11 @@ function gameBoardModule() {
 //    2: o player
 function Cell() { 
   // initialize variable for marker value
-  let _value = 0;
+  let _marker = 0;
   // create method to make the move based on the player calling it
-  const addMarker = (player) => _value = player;
+  const addMarker = (player) => _marker = player;
   // create method to get the move
-  const getValue = () => _value;
+  const getValue = () => _marker;
   // return the 2 methods
   return {
     addMarker,
@@ -66,7 +66,19 @@ function Cell() {
 //  controls flow and state of game turns
 function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
   // initialize board to gameboard module
+  const _board = gameBoardModule();
+  
   // create array of player objects
+  const players = [
+    {
+      _name: playerOneName,
+      _marker: 1
+    },
+    {
+      _name: playerOneName,
+      _marker: 2
+    }
+  ];
   //  each player has a value for their marker (x or o)
   // set the active player to random player in the array
 
