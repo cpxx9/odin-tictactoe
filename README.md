@@ -28,7 +28,12 @@ return the 3 methods
 return the 2 methods
 
 ### module for game controller  
-  
+**Takes two players as parameters**  
+&emsp;>controls flow and state of game turns
+**Initialize board to gameboard**
+**create array of player objects**
+&emsp;>each player has a value for their marker (x or o)
+
 ### factory for creating players  
 
   
