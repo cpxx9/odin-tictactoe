@@ -79,8 +79,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   };
 
   const checkWinner = () => {
-    const _boardWithMarkerValues = _board.map((row) => row.map((cell) => cell.getValue()));
-    console.log(_board.getBoard());
+    const _boardWithMarkerValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
+    console.log(_boardWithMarkerValues);
   };
 
   const playRound = (row, column) => {
