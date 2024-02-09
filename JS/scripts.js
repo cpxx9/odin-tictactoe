@@ -82,7 +82,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   
   // set the active player to random player in the array
   let _activePlayer = players[Math.floor(Math.random() * 2)];
-  console.log(_activePlayer);
   // create method to switch the active player
   const switchPlayerTurn = () => {
     _activePlayer = _activePlayer === players[0] ? players[1] : players[0];
