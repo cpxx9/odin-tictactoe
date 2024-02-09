@@ -101,5 +101,3 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     playRound
   }
 })();
-
-// const game = GameControllerModule();
