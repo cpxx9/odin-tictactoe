@@ -53,7 +53,7 @@ function Cell() {
 }
 
 // module for game controller
-function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
+const game = (function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
   const _board = gameBoardModule();
   const players = [
     {
@@ -100,6 +100,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     getActivePlayer,
     playRound
   }
-}
+})();
 
-const game = GameControllerModule();
+// const game = GameControllerModule();
