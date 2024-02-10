@@ -77,10 +77,20 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     _board.printBoard();
     console.log(`${getActivePlayer()._name}'s turn.`);
   };
+  
+  const endGame = (finalBoard) => {
+    console.log("game over  ", finalBoard);
+  };
 
   const checkWinner = () => {
     const _boardWithMarkerValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
-    console.log(_boardWithMarkerValues);
+    for (let i = 0; i < _boardWithMarkerValues.length; i++) {
+      //horizontal checks
+      if (_boardWithMarkerValues[i][0] === _boardWithMarkerValues[i][1] && _boardWithMarkerValues[i][1] === _boardWithMarkerValues[i][2]) {
+        endGame(_boardWithMarkerValues);
+      }
+    }
+
   };
 
   const playRound = (row, column) => {
