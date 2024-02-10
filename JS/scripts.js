@@ -90,15 +90,22 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     return true;
   };
 
-  const checkWinner = () => {
-    const _boardWithMarkerValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
-    // horizontal checks
-    for (let i = 0; i < _boardWithMarkerValues.length; i++) {
-      if (_boardWithMarkerValues[i][0] === _boardWithMarkerValues[i][1] && _boardWithMarkerValues[i][1] === _boardWithMarkerValues[i][2] && _boardWithMarkerValues[i][i] != 0) {
-        return endGame(_boardWithMarkerValues[i][1]);
+  const horizontalCheck = (currentBoard) => {
+    for (let i = 0; i < currentBoard.length; i++) {
+      if (currentBoard[i][0] === currentBoard[i][1] && currentBoard[i][1] === currentBoard[i][2] && currentBoard[i][i] != 0) {
+        if (endGame(currentBoard[i][1])) {
+          return true;
+        };
       }
     }
+  }; 
 
+  const checkWinner = () => {
+    const _currentBoardValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
+    // horizontal checks
+    if (horizontalCheck(_currentBoardValues) /* || verticleCehck() || crossCheck()*/){
+      return true;
+    }
   };
 
   const playRound = (row, column) => {
