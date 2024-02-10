@@ -100,10 +100,18 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     }
   }; 
 
+  const verticleCheck = (currentBoard) => {
+
+  };
+
+  const crossCheck = (currentBoard) => {
+
+  };
+
   const checkWinner = () => {
     const _currentBoardValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
     // horizontal checks
-    if (horizontalCheck(_currentBoardValues) /* || verticleCehck() || crossCheck()*/){
+    if (horizontalCheck(_currentBoardValues) || verticleCheck(_currentBoardValues) || crossCheck(_currentBoardValues)){
       return true;
     }
   };
