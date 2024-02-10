@@ -86,8 +86,9 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     const _boardWithMarkerValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
     for (let i = 0; i < _boardWithMarkerValues.length; i++) {
       //horizontal checks
-      if (_boardWithMarkerValues[i][0] === _boardWithMarkerValues[i][1] && _boardWithMarkerValues[i][1] === _boardWithMarkerValues[i][2]) {
+      if (_boardWithMarkerValues[i][0] === _boardWithMarkerValues[i][1] && _boardWithMarkerValues[i][1] === _boardWithMarkerValues[i][2] && _boardWithMarkerValues[i][i] != 0) {
         endGame(_boardWithMarkerValues);
+        return;
       }
     }
 
