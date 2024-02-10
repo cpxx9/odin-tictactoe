@@ -80,6 +80,7 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
   
   const endGame = (winnerMarker) => {
     //determine the winner
+    _board.printBoard();
     let winner;
     players.forEach((player) => {
       if (player._marker === winnerMarker) {
@@ -92,18 +93,23 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
   const horizontalCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[i][0] === currentBoard[i][1] && currentBoard[i][1] === currentBoard[i][2] && currentBoard[i][i] != 0) {
-        endGame(currentBoard[i][1])
+        endGame(currentBoard[i][1]);
         return true;        
       }
     }
   }; 
 
   const verticleCheck = (currentBoard) => {
-
+    for (let i = 0; i < currentBoard.length; i++) {
+      if (currentBoard[0][i] === currentBoard[1][i] && currentBoard[1][i] === currentBoard[2][i] && currentBoard[i][i] != 0) {
+        endGame(currentBoard[1][i]);
+        return true;
+      }
+    }
   };
 
   const crossCheck = (currentBoard) => {
-
+    return;
   };
 
   const checkWinner = () => {
