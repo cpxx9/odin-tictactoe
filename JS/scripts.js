@@ -78,17 +78,24 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     console.log(`${getActivePlayer()._name}'s turn.`);
   };
   
-  const endGame = (finalBoard) => {
-    console.log("game over  ", finalBoard);
+  const endGame = (winnerMarker) => {
+    //determine the winner
+    let winner;
+    players.forEach((player) => {
+      if (player._marker === winnerMarker) {
+        winner = player._name;
+      }
+    });
+    console.log(`Game over! ${winner} wins!`);
+    return true;
   };
 
   const checkWinner = () => {
     const _boardWithMarkerValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
+    // horizontal checks
     for (let i = 0; i < _boardWithMarkerValues.length; i++) {
-      //horizontal checks
       if (_boardWithMarkerValues[i][0] === _boardWithMarkerValues[i][1] && _boardWithMarkerValues[i][1] === _boardWithMarkerValues[i][2] && _boardWithMarkerValues[i][i] != 0) {
-        endGame(_boardWithMarkerValues);
-        return;
+        return endGame(_boardWithMarkerValues[i][1]);
       }
     }
 
@@ -98,7 +105,9 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     console.log(`Marking for ${getActivePlayer()._name} in Row: ${row}, Column: ${column}`);
     _board.placeMarker(row, column, getActivePlayer()._marker);
     
-    checkWinner();
+    if(checkWinner()) {
+      return;
+    }
 
     switchPlayerTurn();
     printNewRound();
