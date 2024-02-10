@@ -81,13 +81,17 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
   const endGame = (winnerMarker) => {
     //determine the winner
     _board.printBoard();
-    let winner;
-    players.forEach((player) => {
-      if (player._marker === winnerMarker) {
-        winner = player._name;
-      }
-    });
-    console.log(`Game over! ${winner} wins!`);
+    if (winnerMarker === 'tie') {
+      console.log(`Game over! It's a tie!`)
+    } else {
+      let winner;
+      players.forEach((player) => {
+        if (player._marker === winnerMarker) {
+          winner = player._name;
+        }
+      });
+      console.log(`Game over! ${winner} wins!`);
+    }
   };
 
   const horizontalCheck = (currentBoard) => {
@@ -109,7 +113,23 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
   };
 
   const crossCheck = (currentBoard) => {
-    return;
+    if (currentBoard[1][1] != 0 && ((currentBoard[0][0] === currentBoard[1][1] && currentBoard[1][1] === currentBoard[2][2]) || (currentBoard[0][2] === currentBoard[1][1] && currentBoard[1][1] === currentBoard[2][0]))) {
+      endGame(currentBoard[1][1]);
+        return true;
+    }
+  };
+
+  const tieCheck = (currentBoard) => {
+    let emptyCells = 9;
+    for (let i = 0; i < currentBoard.length; i++) {
+      for (let n = 0; n < currentBoard[i].length; n++) {
+        currentBoard[i][n] != 0 ? emptyCells-- : emptyCells = emptyCells;
+      }
+    }
+    if (emptyCells === 0) {
+      endGame('tie');
+      return true;
+    }
   };
 
   const checkWinner = () => {
@@ -117,6 +137,10 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     
     if (horizontalCheck(_currentBoardValues) || verticleCheck(_currentBoardValues) || crossCheck(_currentBoardValues)){
       return true;
+    } else {
+      if(tieCheck(_currentBoardValues)) {
+        return true;
+      }
     }
   };
 
