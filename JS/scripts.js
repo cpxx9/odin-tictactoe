@@ -87,15 +87,13 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
       }
     });
     console.log(`Game over! ${winner} wins!`);
-    return true;
   };
 
   const horizontalCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[i][0] === currentBoard[i][1] && currentBoard[i][1] === currentBoard[i][2] && currentBoard[i][i] != 0) {
-        if (endGame(currentBoard[i][1])) {
-          return true;
-        };
+        endGame(currentBoard[i][1])
+        return true;        
       }
     }
   }; 
@@ -110,7 +108,7 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
 
   const checkWinner = () => {
     const _currentBoardValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
-    // horizontal checks
+    
     if (horizontalCheck(_currentBoardValues) || verticleCheck(_currentBoardValues) || crossCheck(_currentBoardValues)){
       return true;
     }
