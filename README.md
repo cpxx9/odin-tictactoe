@@ -57,7 +57,7 @@ return the method to get the active player and the play round method
   
 ## DOM integration  
   
-### Method for controlling the screen  
+### Module for controlling the screen  
 **store game controller in a variable**  
 **grab the DOM elements for board and turn notif**  
 **get the current value of the board**  
