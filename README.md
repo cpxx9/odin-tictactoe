@@ -55,4 +55,12 @@ return the method to get the active player and the play round method
   
 ### store the controller object in a variable
   
-## DOM integration
+## DOM integration  
+  
+### Method for controlling the screen  
+**store game controller in a variable**  
+**grab the DOM elements for board and turn notif**  
+**get the current value of the board**  
+**make a button for every cell in the board**  
+**add event listeners to play the game when buttons are clicked**
+**display the winner**
