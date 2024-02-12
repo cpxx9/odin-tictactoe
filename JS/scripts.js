@@ -53,7 +53,7 @@ function Cell() {
 }
 
 // module for game controller
-const game = (function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
+function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
   const _board = gameBoardModule();
   const players = [
     {
@@ -163,4 +163,9 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     getActivePlayer,
     playRound
   }
+}
+
+//module for DOM integration
+(function screenController() {
+  const game = GameControllerModule();
 })();
