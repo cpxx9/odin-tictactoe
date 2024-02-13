@@ -97,7 +97,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const horizontalCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[i][0] === currentBoard[i][1] && currentBoard[i][1] === currentBoard[i][2] && currentBoard[i][i] != 0) {
-        endGame(currentBoard[i][1]);
         return true;        
       }
     }
@@ -106,7 +105,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const verticleCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[0][i] === currentBoard[1][i] && currentBoard[1][i] === currentBoard[2][i] && currentBoard[i][i] != 0) {
-        endGame(currentBoard[1][i]);
         return true;
       }
     }
@@ -114,7 +112,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   const crossCheck = (currentBoard) => {
     if (currentBoard[1][1] != 0 && ((currentBoard[0][0] === currentBoard[1][1] && currentBoard[1][1] === currentBoard[2][2]) || (currentBoard[0][2] === currentBoard[1][1] && currentBoard[1][1] === currentBoard[2][0]))) {
-      endGame(currentBoard[1][1]);
         return true;
     }
   };
@@ -127,7 +124,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       }
     }
     if (emptyCells === 0) {
-      endGame('tie');
       return true;
     }
   };
@@ -136,10 +132,10 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     const _currentBoardValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
     
     if (horizontalCheck(_currentBoardValues) || verticleCheck(_currentBoardValues) || crossCheck(_currentBoardValues)){
-      return true;
+      return 'win';
     } else {
       if(tieCheck(_currentBoardValues)) {
-        return true;
+        return 'tie';
       }
     }
   };
@@ -148,13 +144,14 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     console.log(`Marking for ${getActivePlayer()._name} in Row: ${row}, Column: ${column}`);
     _board.placeMarker(row, column, getActivePlayer()._marker);
     
-    if(checkWinner()) {
-      return;
-    }
-
-    switchPlayerTurn();
-    printNewRound();
-    
+    if(checkWinner() === 'win') {
+      return 'win';
+    } else if (checkWinner() === 'tie') {
+      return 'tie'
+    } else {
+      switchPlayerTurn();
+      printNewRound();
+    }    
   }
 
   printNewRound();
@@ -193,7 +190,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
             gameButton.textContent = 'X';
             break;
           case 2:
-            gameButton.textContent = 'Y';
+            gameButton.textContent = 'O';
             break;
           defualt:
             gameButton.textContent = '';
@@ -204,12 +201,27 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     });
   };
 
+  const endGame = (outcome) => {
+    if (outcome === 'tie') {
+      console.log("tie");
+    } else {
+      console.log("win");
+    }
+  };
+
   function buttonClickHandler(e) {
     const selectedRow = e.target.dataset.row;
     const selectedColumn = e.target.dataset.column;
     if(!selectedColumn || !selectedRow) return;
 
-    game.playRound(selectedRow, selectedColumn);
+    const round = game.playRound(selectedRow, selectedColumn);
+
+    if (round === 'win') {
+      const winner = game.getActivePlayer();
+      endGame(winner._marker);
+    } else if (round === 'tie') {
+      endGame('tie');
+    }
     
     updateScreen();
   }
