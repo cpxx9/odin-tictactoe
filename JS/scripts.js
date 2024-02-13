@@ -179,11 +179,12 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
     turnDOM.textContent = `${currentPlayer}'s turn...`;
 
-    board.forEach((row) => {
-      row.forEach((cell, index) => {
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
         const gameButton = document.createElement('button');
         gameButton.classList.add('cell');
-        gameButton.dataset.column = index;
+        gameButton.dataset.row = rowIndex;
+        gameButton.dataset.column = columnIndex;
         gameButton.textContent = cell.getValue();
         boardDOM.appendChild(gameButton);
       })
