@@ -164,7 +164,9 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       playerCounter++;
       updatePlayerInput();
       playerCreateInput.value = '';
-      console.log(players);
+      if (playerCounter === playerAmount + 1) {
+        playerCreationDOM.innerHTML = '';
+      }
     };
   }
 
