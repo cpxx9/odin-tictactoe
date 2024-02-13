@@ -170,11 +170,13 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   };
 
   const endGame = (outcome) => {
-    if (outcome === 'tie') {
-      console.log("tie");
-    } else if (outcome === 'win') {
-      const winner = game.getActivePlayer();
-      console.log(`${winner._name} wins!`)
+    if (outcome === 'tie' || outcome === 'win'){
+      let buttons = boardDOM.querySelectorAll('.cell');
+      if (outcome === 'tie') {
+      } else if (outcome === 'win') {
+        const winner = game.getActivePlayer();
+        turnDOM.textContent = `${winner._name} wins!`;
+      }
     }
   };
 
@@ -182,14 +184,15 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     const selectedRow = e.target.dataset.row;
     const selectedColumn = e.target.dataset.column;
     if(!selectedColumn || !selectedRow) return;
-
+    
     const round = game.playRound(selectedRow, selectedColumn);
-    endGame(round);
-   
+
     updateScreen();
+
+    endGame(round);
   }
 
-  boardDOM.addEventListener('click', buttonClickHandler);
+  boardDOM.addEventListener('click', buttonClickHandler);  
 
   updateScreen();
 })();
