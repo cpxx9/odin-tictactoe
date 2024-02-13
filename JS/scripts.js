@@ -23,16 +23,9 @@ function gameBoardModule() {
     }
   }
   
-  //  will be removed later
-  const printBoard = () => {
-    const _boardWithMarkerValues = _board.map((row) => row.map((cell) => cell.getValue()));
-    console.log(_boardWithMarkerValues);
-  }
-  
   return {
     getBoard,
-    placeMarker,
-    printBoard
+    placeMarker
   }
 }
 
@@ -53,7 +46,7 @@ function Cell() {
 }
 
 // module for game controller
-const game = (function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
+function GameControllerModule(playerOneName = "Player One", playerTwoName = "Player Two") {
   const _board = gameBoardModule();
   const players = [
     {
@@ -73,31 +66,9 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
 
   const getActivePlayer = () => _activePlayer;
 
-  const printNewRound = () => {
-    _board.printBoard();
-    console.log(`${getActivePlayer()._name}'s turn.`);
-  };
-  
-  const endGame = (winnerMarker) => {
-    //determine the winner
-    _board.printBoard();
-    if (winnerMarker === 'tie') {
-      console.log(`Game over! It's a tie!`)
-    } else {
-      let winner;
-      players.forEach((player) => {
-        if (player._marker === winnerMarker) {
-          winner = player._name;
-        }
-      });
-      console.log(`Game over! ${winner} wins!`);
-    }
-  };
-
   const horizontalCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[i][0] === currentBoard[i][1] && currentBoard[i][1] === currentBoard[i][2] && currentBoard[i][i] != 0) {
-        endGame(currentBoard[i][1]);
         return true;        
       }
     }
@@ -106,7 +77,6 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
   const verticleCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[0][i] === currentBoard[1][i] && currentBoard[1][i] === currentBoard[2][i] && currentBoard[i][i] != 0) {
-        endGame(currentBoard[1][i]);
         return true;
       }
     }
@@ -114,7 +84,6 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
 
   const crossCheck = (currentBoard) => {
     if (currentBoard[1][1] != 0 && ((currentBoard[0][0] === currentBoard[1][1] && currentBoard[1][1] === currentBoard[2][2]) || (currentBoard[0][2] === currentBoard[1][1] && currentBoard[1][1] === currentBoard[2][0]))) {
-      endGame(currentBoard[1][1]);
         return true;
     }
   };
@@ -127,7 +96,6 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
       }
     }
     if (emptyCells === 0) {
-      endGame('tie');
       return true;
     }
   };
@@ -136,31 +104,99 @@ const game = (function GameControllerModule(playerOneName = "Player One", player
     const _currentBoardValues = _board.getBoard().map((row) => row.map((cell) => cell.getValue()));
     
     if (horizontalCheck(_currentBoardValues) || verticleCheck(_currentBoardValues) || crossCheck(_currentBoardValues)){
-      return true;
+      return 'win';
     } else {
       if(tieCheck(_currentBoardValues)) {
-        return true;
+        return 'tie';
       }
     }
   };
 
   const playRound = (row, column) => {
-    console.log(`Marking for ${getActivePlayer()._name} in Row: ${row}, Column: ${column}`);
     _board.placeMarker(row, column, getActivePlayer()._marker);
     
-    if(checkWinner()) {
-      return;
-    }
-
-    switchPlayerTurn();
-    printNewRound();
-    
+    if(checkWinner() === 'win') {
+      return 'win';
+    } else if (checkWinner() === 'tie') {
+      return 'tie'
+    } else {
+      switchPlayerTurn();
+    }    
   }
-
-  printNewRound();
 
   return {
     getActivePlayer,
-    playRound
+    playRound,
+    getBoard: _board.getBoard
   }
+}
+
+//module for DOM integration
+(function screenController() {
+  const game = GameControllerModule();
+  const boardDOM = document.querySelector('.board');
+  const turnDOM = document.querySelector('.turn');
+
+  const updateScreen = () => {
+    boardDOM.textContent = '';
+
+    const board = game.getBoard();
+    const currentPlayer = game.getActivePlayer();
+
+    turnDOM.textContent = `${currentPlayer._name}'s turn...`;
+
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
+        const gameButton = document.createElement('button');
+        gameButton.classList.add('cell');
+        gameButton.dataset.row = rowIndex;
+        gameButton.dataset.column = columnIndex;
+
+        const cellMarker = cell.getValue();
+        switch (cellMarker) {
+          case 1:
+            gameButton.textContent = 'X';
+            break;
+          case 2:
+            gameButton.textContent = 'O';
+            break;
+          defualt:
+            gameButton.textContent = '';
+        }
+
+        boardDOM.appendChild(gameButton);
+      })
+    });
+  };
+
+  const endGame = (outcome) => {
+    if (outcome === 'tie' || outcome === 'win'){
+      let buttons = boardDOM.querySelectorAll('.cell');
+      buttons.forEach((button) => {
+        button.disabled = true;
+      });
+      if (outcome === 'tie') {
+        turnDOM.textContent = "It's a tie!";
+      } else if (outcome === 'win') {
+        const winner = game.getActivePlayer();
+        turnDOM.textContent = `${winner._name} wins!`;
+      }
+    }
+  };
+
+  function buttonClickHandler(e) {
+    const selectedRow = e.target.dataset.row;
+    const selectedColumn = e.target.dataset.column;
+    if(!selectedColumn || !selectedRow) return;
+    
+    const round = game.playRound(selectedRow, selectedColumn);
+
+    updateScreen();
+
+    endGame(round);
+  }
+
+  boardDOM.addEventListener('click', buttonClickHandler);  
+
+  updateScreen();
 })();
