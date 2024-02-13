@@ -138,13 +138,34 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
 
-  const createPlayerOne = () => {
-    
-  };
+  const createPlayers = (playerAmount) => {
+    let playerCounter = 1;
+    let players = [];
+    const playerCreateLabel = document.createElement('label');
+    const playerCreateInput = document.createElement('input');
+    const playerCreateButton = document.createElement('button');
+    const updatePlayerInput = () => {
+      playerCreateLabel.textContent = `Player ${playerCounter}'s name:`;
+    };
 
-  const createPlayers = () => {
-    createPlayerOne();
-    createPlayerTwo();
+    playerCreateLabel.classList.add('creation-label');
+    playerCreateInput.classList.add('creation-input');    
+    playerCreateButton.classList.add('creation-button');    
+
+    updatePlayerInput();    
+    playerCreateButton.textContent = "Submit";
+
+    playerCreationDOM.appendChild(playerCreateLabel);
+    playerCreationDOM.appendChild(playerCreateInput);
+    playerCreationDOM.appendChild(playerCreateButton);    
+
+    playerCreateButton.onclick = function(){
+      players.push(playerCreateInput.value);
+      playerCounter++;
+      updatePlayerInput();
+      playerCreateInput.value = '';
+      console.log(players);
+    };
   }
 
   const updateScreen = () => {
@@ -208,6 +229,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   boardDOM.addEventListener('click', buttonClickHandler);  
 
-  createPlayers();
+  createPlayers(2);
   updateScreen();
 })();
