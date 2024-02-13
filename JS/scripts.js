@@ -176,6 +176,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
         button.disabled = true;
       });
       if (outcome === 'tie') {
+        turnDOM.textContent = "It's a tie!";
       } else if (outcome === 'win') {
         const winner = game.getActivePlayer();
         turnDOM.textContent = `${winner._name} wins!`;
