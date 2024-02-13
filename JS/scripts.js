@@ -161,7 +161,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   return {
     getActivePlayer,
-    playRound
+    playRound,
+    getBoard: _board.getBoard
   }
 }
 
@@ -177,7 +178,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     const board = game.getBoard();
     const currentPlayer = game.getActivePlayer();
 
-    turnDOM.textContent = `${currentPlayer}'s turn...`;
+    turnDOM.textContent = `${currentPlayer._name}'s turn...`;
 
     board.forEach((row, rowIndex) => {
       row.forEach((cell, columnIndex) => {
@@ -185,13 +186,35 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
         gameButton.classList.add('cell');
         gameButton.dataset.row = rowIndex;
         gameButton.dataset.column = columnIndex;
-        gameButton.textContent = cell.getValue();
+
+        const cellMarker = cell.getValue();
+        switch (cellMarker) {
+          case 1:
+            gameButton.textContent = 'X';
+            break;
+          case 2:
+            gameButton.textContent = 'Y';
+            break;
+          defualt:
+            gameButton.textContent = '';
+        }
+
         boardDOM.appendChild(gameButton);
       })
     });
   };
 
   function buttonClickHandler(e) {
+    const selectedRow = e.target.dataset.row;
+    const selectedColumn = e.target.dataset.column;
+    if(!selectedColumn || !selectedRow) return;
+
+    game.playRound(selectedRow, selectedColumn);
     
+    updateScreen();
   }
+
+  boardDOM.addEventListener('click', buttonClickHandler);
+
+  updateScreen();
 })();
