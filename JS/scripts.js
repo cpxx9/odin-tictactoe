@@ -172,6 +172,9 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const endGame = (outcome) => {
     if (outcome === 'tie' || outcome === 'win'){
       let buttons = boardDOM.querySelectorAll('.cell');
+      buttons.forEach((button) => {
+        button.disabled = true;
+      });
       if (outcome === 'tie') {
       } else if (outcome === 'win') {
         const winner = game.getActivePlayer();
