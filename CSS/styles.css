@@ -24,6 +24,7 @@ a:hover {
   justify-content: center;
   align-items: center;
  }
+ 
 /*GAMEBOARD
 ------------------------------*/
 .board {
@@ -36,7 +37,6 @@ a:hover {
 
 /*FOOTER
 ------------------------------*/
-
 footer a {
 	color: #bcaa96;
 }
