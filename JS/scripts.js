@@ -23,16 +23,9 @@ function gameBoardModule() {
     }
   }
   
-  //  will be removed later
-  const printBoard = () => {
-    const _boardWithMarkerValues = _board.map((row) => row.map((cell) => cell.getValue()));
-    console.log(_boardWithMarkerValues);
-  }
-  
   return {
     getBoard,
-    placeMarker,
-    printBoard
+    placeMarker
   }
 }
 
@@ -72,27 +65,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   };
 
   const getActivePlayer = () => _activePlayer;
-
-  const printNewRound = () => {
-    _board.printBoard();
-    console.log(`${getActivePlayer()._name}'s turn.`);
-  };
-  
-  const endGame = (winnerMarker) => {
-    //determine the winner
-    _board.printBoard();
-    if (winnerMarker === 'tie') {
-      console.log(`Game over! It's a tie!`)
-    } else {
-      let winner;
-      players.forEach((player) => {
-        if (player._marker === winnerMarker) {
-          winner = player._name;
-        }
-      });
-      console.log(`Game over! ${winner} wins!`);
-    }
-  };
 
   const horizontalCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
@@ -141,7 +113,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   };
 
   const playRound = (row, column) => {
-    console.log(`Marking for ${getActivePlayer()._name} in Row: ${row}, Column: ${column}`);
     _board.placeMarker(row, column, getActivePlayer()._marker);
     
     if(checkWinner() === 'win') {
@@ -150,11 +121,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       return 'tie'
     } else {
       switchPlayerTurn();
-      printNewRound();
     }    
   }
-
-  printNewRound();
 
   return {
     getActivePlayer,
