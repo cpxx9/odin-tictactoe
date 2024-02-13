@@ -5,6 +5,9 @@ body{
 	font-size: 16px;
 	line-height: 1.6em;
 	margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -15,6 +18,24 @@ a:hover {
 	color: #bcaa96;
 	text-decoration: none;
 }
+ main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+/*GAMEBOARD
+------------------------------*/
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 500px;
+  height: 500px;
+}
+
+/*FOOTER
+------------------------------*/
 
 footer a {
 	color: #bcaa96;
@@ -29,10 +50,6 @@ footer {
 	color: #d3d4d6;
 	padding: 0 20px;
 }
-
-/* footer p {
-	padding: 8px 0;
-} */
 
 .socials {
 	list-style-type: none;
