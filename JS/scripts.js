@@ -168,4 +168,29 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 //module for DOM integration
 (function screenController() {
   const game = GameControllerModule();
+  const boardDOM = document.querySelector('.board');
+  const turnDOM = document.querySelector('.turn');
+
+  const updateScreen = () => {
+    boardDOM.textContent = '';
+
+    const board = game.getBoard();
+    const currentPlayer = game.getActivePlayer();
+
+    turnDOM.textContent = `${currentPlayer}'s turn...`;
+
+    board.forEach((row) => {
+      row.forEach((cell, index) => {
+        const gameButton = document.createElement('button');
+        gameButton.classList.add('cell');
+        gameButton.dataset.column = index;
+        gameButton.textContent = cell.getValue();
+        boardDOM.appendChild(gameButton);
+      })
+    });
+  };
+
+  function buttonClickHandler(e) {
+    
+  }
 })();
