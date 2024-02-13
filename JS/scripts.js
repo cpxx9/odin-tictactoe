@@ -172,8 +172,9 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const endGame = (outcome) => {
     if (outcome === 'tie') {
       console.log("tie");
-    } else {
-      console.log("win");
+    } else if (outcome === 'win') {
+      const winner = game.getActivePlayer();
+      console.log(`${winner._name} wins!`)
     }
   };
 
@@ -183,14 +184,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     if(!selectedColumn || !selectedRow) return;
 
     const round = game.playRound(selectedRow, selectedColumn);
-
-    if (round === 'win') {
-      const winner = game.getActivePlayer();
-      endGame(winner._marker);
-    } else if (round === 'tie') {
-      endGame('tie');
-    }
-    
+    endGame(round);
+   
     updateScreen();
   }
 
