@@ -134,8 +134,18 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 //module for DOM integration
 (function screenController() {
   const game = GameControllerModule();
+  const playerCreationDOM = document.querySelector('.player-creation');
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
+
+  const createPlayerOne = () => {
+    
+  };
+
+  const createPlayers = () => {
+    createPlayerOne();
+    createPlayerTwo();
+  }
 
   const updateScreen = () => {
     boardDOM.textContent = '';
@@ -198,5 +208,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   boardDOM.addEventListener('click', buttonClickHandler);  
 
+  createPlayers();
   updateScreen();
 })();
