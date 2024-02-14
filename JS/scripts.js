@@ -283,6 +283,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   function restartClickHandler() {
     updateScreen();
     restartButton.disabled = true;
+    console.log(resetDOM);
     game = GameControllerModule();
     getPlayers(2);
     addResetButton();
@@ -291,11 +292,3 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   addResetButton();
   updateScreen();
 })();
-
-
-
-// NOT WORKING FUNCTION TO CHANGE PLAYER NAMES
-
-// function createPlayers (playerAmount) {
-//   
-// }
