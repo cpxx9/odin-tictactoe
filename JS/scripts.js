@@ -202,7 +202,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
       resetDOM.appendChild(rematchButton);
     }
-  };
+  };  
 
   function buttonClickHandler(e) {
     const selectedRow = e.target.dataset.row;
@@ -239,9 +239,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
 // NOT WORKING FUNCTION TO CHANGE PLAYER NAMES
 
-// (function createPlayers () {
+// function createPlayers (playerAmount) {
 //   let playerCounter = 1;
-//   const playerAmount = 2;
 //   let players = [];
 //   const playerCreateLabel = document.createElement('label');
 //   const playerCreateInput = document.createElement('input');
@@ -268,7 +267,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 //     playerCreateInput.value = '';
 //     if (playerCounter === playerAmount + 1) {
 //       playerCreationDOM.innerHTML = '';
+//       return players = [];
 //     }
 //   };
-//   game = GameControllerModule(players[0], players[1]);
-// })();
+// }
