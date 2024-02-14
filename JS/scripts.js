@@ -139,6 +139,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 //module for DOM integration
 (function screenController() {
   let game = GameControllerModule();
+  let players = [];
   const playerCreationDOM = document.querySelector('.player-creation');
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
@@ -216,7 +217,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       });
     
     let playerCounter = 1;
-    let players = [];
     const playerCreateLabel = document.createElement('label');
     const playerCreateInput = document.createElement('input');
     const playerCreateButton = document.createElement('button');
@@ -251,6 +251,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
     playerCreateButton.onclick = function(){
       game.changePlayerName((playerCounter - 1), playerCreateInput.value);
+      players.push(playerCreateInput.value);
       playerCounter++;
       updatePlayerInput();
       playerCreateInput.value = '';
@@ -277,14 +278,17 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   boardDOM.addEventListener('click', buttonClickHandler);  
 
   function rematchClickHandler() {
-    console.log('test');
+    game = GameControllerModule(players[0], players[1])
+    updateScreen();
+    resetDOM.innerHTML = '';
+    addResetButton();
   }
 
   function restartClickHandler() {
+    players = [];
+    game = GameControllerModule();
     updateScreen();
     restartButton.disabled = true;
-    console.log(resetDOM);
-    game = GameControllerModule();
     getPlayers(2);
     resetDOM.innerHTML = '';
     addResetButton();
