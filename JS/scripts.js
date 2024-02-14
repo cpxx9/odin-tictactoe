@@ -186,6 +186,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     resetDOM.appendChild(restartButton);
   };
 
+  const rematchButton = document.createElement('button');
   const endGame = (outcome) => {
     if (outcome === 'tie' || outcome === 'win'){
       let buttons = boardDOM.querySelectorAll('.cell');
@@ -200,17 +201,20 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
         turnDOM.textContent = `${winner._name} wins!`;
       }
 
-      const rematchButton = document.createElement('button');
       rematchButton.classList.add('rematch-btn');
       rematchButton.classList.add('reset-btns');
       rematchButton.textContent = "Rematch?";
       rematchButton.addEventListener('click', rematchClickHandler);
-
       resetDOM.appendChild(rematchButton);
     }
   };  
 
   const getPlayers = (playerAmount) => {
+    let buttons = document.querySelectorAll('.cell');
+      buttons.forEach((button) => {
+        button.disabled = true;
+      });
+    
     let playerCounter = 1;
     let players = [];
     const playerCreateLabel = document.createElement('label');
@@ -241,8 +245,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       if (playerCounter === playerAmount + 1) {
         playerCreationDOM.innerHTML = '';
         restartButton.disabled = false;
+        updateScreen();
       }
-      updateScreen();
     };
 
     playerCreateButton.onclick = function(){
@@ -253,8 +257,8 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       if (playerCounter === playerAmount + 1) {
         playerCreationDOM.innerHTML = '';
         restartButton.disabled = false;
+        updateScreen();
       }
-      updateScreen();
     };
   };
 
@@ -277,17 +281,12 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   }
 
   function restartClickHandler() {
-    restartButton.disabled = true;
-    turnDOM.innerHTML = '';
-    resetDOM.innerHTML = '';
+    updateScreen();
+    rematchButton.innerHTML = '';
+    resetDOM.removeChild(rematchButton);
     game = GameControllerModule();
-    let buttons = boardDOM.querySelectorAll('.cell');
-      buttons.forEach((button) => {
-        button.disabled = true;
-      });
     getPlayers(2);
     addResetButton();
-    updateScreen();
   }
 
   addResetButton();
