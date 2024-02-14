@@ -282,8 +282,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   function restartClickHandler() {
     updateScreen();
-    rematchButton.innerHTML = '';
-    resetDOM.removeChild(rematchButton);
+    restartButton.disabled = true;
     game = GameControllerModule();
     getPlayers(2);
     addResetButton();
