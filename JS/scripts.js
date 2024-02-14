@@ -134,7 +134,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 //module for DOM integration
 (function screenController() {
   let game = GameControllerModule();
-  let game = GameControllerModule();
   const playerCreationDOM = document.querySelector('.player-creation');
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
