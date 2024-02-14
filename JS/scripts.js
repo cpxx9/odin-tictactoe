@@ -168,6 +168,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
         playerCreationDOM.innerHTML = '';
       }
     };
+    return players;
   }
 
   const updateScreen = () => {
