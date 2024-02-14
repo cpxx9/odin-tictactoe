@@ -66,6 +66,10 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   const getActivePlayer = () => _activePlayer;
 
+  const changePlayerName = (index, name) => {
+    players[index]._name = name;
+  };
+
   const horizontalCheck = (currentBoard) => {
     for (let i = 0; i < currentBoard.length; i++) {
       if (currentBoard[i][0] === currentBoard[i][1] && currentBoard[i][1] === currentBoard[i][2] && currentBoard[i][i] != 0) {
@@ -126,6 +130,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   return {
     getActivePlayer,
+    changePlayerName,
     playRound,
     getBoard: _board.getBoard
   }
@@ -171,8 +176,9 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     });
   };
 
+  const restartButton = document.createElement('button');
   const addResetButton = () => {
-    const restartButton = document.createElement('button');
+    
     restartButton.classList.add('restart-btn');
     restartButton.classList.add('reset-btns');
     restartButton.textContent = "New players?";
@@ -204,6 +210,54 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     }
   };  
 
+  const getPlayers = (playerAmount) => {
+    let playerCounter = 1;
+    let players = [];
+    const playerCreateLabel = document.createElement('label');
+    const playerCreateInput = document.createElement('input');
+    const playerCreateButton = document.createElement('button');
+    const cancelButton = document.createElement('button');
+    const updatePlayerInput = () => {
+      playerCreateLabel.textContent = `Player ${playerCounter}'s name:`;
+    };
+
+    playerCreateLabel.classList.add('creation-label');
+    playerCreateInput.classList.add('creation-input');    
+    playerCreateButton.classList.add('creation-button');    
+
+    updatePlayerInput();    
+    playerCreateButton.textContent = "Submit";
+    cancelButton.textContent = "Leave default";
+
+    playerCreationDOM.appendChild(playerCreateLabel);
+    playerCreationDOM.appendChild(playerCreateInput);
+    playerCreationDOM.appendChild(playerCreateButton);    
+    playerCreationDOM.appendChild(cancelButton);    
+
+    cancelButton.onclick = function() {
+      playerCounter++;
+      updatePlayerInput();
+      playerCreateInput.value = '';
+      if (playerCounter === playerAmount + 1) {
+        playerCreationDOM.innerHTML = '';
+        restartButton.disabled = false;
+      }
+      updateScreen();
+    };
+
+    playerCreateButton.onclick = function(){
+      game.changePlayerName((playerCounter - 1), playerCreateInput.value);
+      playerCounter++;
+      updatePlayerInput();
+      playerCreateInput.value = '';
+      if (playerCounter === playerAmount + 1) {
+        playerCreationDOM.innerHTML = '';
+        restartButton.disabled = false;
+      }
+      updateScreen();
+    };
+  };
+
   function buttonClickHandler(e) {
     const selectedRow = e.target.dataset.row;
     const selectedColumn = e.target.dataset.column;
@@ -223,10 +277,15 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   }
 
   function restartClickHandler() {
-    console.log('test');
+    restartButton.disabled = true;
     turnDOM.innerHTML = '';
     resetDOM.innerHTML = '';
     game = GameControllerModule();
+    let buttons = boardDOM.querySelectorAll('.cell');
+      buttons.forEach((button) => {
+        button.disabled = true;
+      });
+    getPlayers(2);
     addResetButton();
     updateScreen();
   }
@@ -240,34 +299,5 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 // NOT WORKING FUNCTION TO CHANGE PLAYER NAMES
 
 // function createPlayers (playerAmount) {
-//   let playerCounter = 1;
-//   let players = [];
-//   const playerCreateLabel = document.createElement('label');
-//   const playerCreateInput = document.createElement('input');
-//   const playerCreateButton = document.createElement('button');
-//   const updatePlayerInput = () => {
-//     playerCreateLabel.textContent = `Player ${playerCounter}'s name:`;
-//   };
-
-//   playerCreateLabel.classList.add('creation-label');
-//   playerCreateInput.classList.add('creation-input');    
-//   playerCreateButton.classList.add('creation-button');    
-
-//   updatePlayerInput();    
-//   playerCreateButton.textContent = "Submit";
-
-//   playerCreationDOM.appendChild(playerCreateLabel);
-//   playerCreationDOM.appendChild(playerCreateInput);
-//   playerCreationDOM.appendChild(playerCreateButton);    
-
-//   playerCreateButton.onclick = function(){
-//     players.push(playerCreateInput.value);
-//     playerCounter++;
-//     updatePlayerInput();
-//     playerCreateInput.value = '';
-//     if (playerCounter === playerAmount + 1) {
-//       playerCreationDOM.innerHTML = '';
-//       return players = [];
-//     }
-//   };
+//   
 // }
