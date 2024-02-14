@@ -171,6 +171,15 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     });
   };
 
+  const addResetButton = () => {
+    const restartButton = document.createElement('button');
+    restartButton.classList.add('restart-btn');
+    restartButton.classList.add('reset-btns');
+    restartButton.textContent = "New players?";
+    restartButton.addEventListener('click', restartClickHandler);    
+    resetDOM.appendChild(restartButton);
+  };
+
   const endGame = (outcome) => {
     if (outcome === 'tie' || outcome === 'win'){
       let buttons = boardDOM.querySelectorAll('.cell');
@@ -185,12 +194,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
         turnDOM.textContent = `${winner._name} wins!`;
       }
 
-      const restartButton = document.createElement('button');
-      restartButton.classList.add('restart-btn');
-      restartButton.classList.add('reset-btns');
-      restartButton.textContent = "New players?";
-      restartButton.addEventListener('click', restartClickHandler);
-
       const rematchButton = document.createElement('button');
       rematchButton.classList.add('rematch-btn');
       rematchButton.classList.add('reset-btns');
@@ -198,7 +201,6 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       rematchButton.addEventListener('click', rematchClickHandler);
 
       resetDOM.appendChild(rematchButton);
-      resetDOM.appendChild(restartButton);
     }
   };
 
@@ -225,9 +227,11 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     turnDOM.innerHTML = '';
     resetDOM.innerHTML = '';
     game = GameControllerModule();
+    addResetButton();
     updateScreen();
   }
 
+  addResetButton();
   updateScreen();
 })();
 
