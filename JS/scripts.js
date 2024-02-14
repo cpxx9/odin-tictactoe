@@ -133,7 +133,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
 //module for DOM integration
 (function screenController() {
-  const game = GameControllerModule();
+  let game = GameControllerModule();
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
   const resetDOM = document.querySelector('.reset');
@@ -195,7 +195,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       rematchButton.classList.add('reset-btns');
       rematchButton.textContent = "Rematch?";
       rematchButton.addEventListener('click', rematchClickHandler);
-      
+
       resetDOM.appendChild(rematchButton);
       resetDOM.appendChild(restartButton);
     }
@@ -213,15 +213,19 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     endGame(round);
   }
 
+  boardDOM.addEventListener('click', buttonClickHandler);  
+
   function rematchClickHandler() {
     console.log('test');
   }
 
   function restartClickHandler() {
     console.log('test');
+    turnDOM.innerHTML = '';
+    resetDOM.innerHTML = '';
+    game = GameControllerModule();
+    updateScreen();
   }
-
-  boardDOM.addEventListener('click', buttonClickHandler);  
 
   updateScreen();
 })();
