@@ -286,6 +286,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     console.log(resetDOM);
     game = GameControllerModule();
     getPlayers(2);
+    resetDOM.innerHTML = '';
     addResetButton();
   }
 
