@@ -133,43 +133,10 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
 //module for DOM integration
 (function screenController() {
-  const game = GameControllerModule();
+  let game = GameControllerModule();
   const playerCreationDOM = document.querySelector('.player-creation');
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
-
-  const createPlayers = (playerAmount) => {
-    let playerCounter = 1;
-    let players = [];
-    const playerCreateLabel = document.createElement('label');
-    const playerCreateInput = document.createElement('input');
-    const playerCreateButton = document.createElement('button');
-    const updatePlayerInput = () => {
-      playerCreateLabel.textContent = `Player ${playerCounter}'s name:`;
-    };
-
-    playerCreateLabel.classList.add('creation-label');
-    playerCreateInput.classList.add('creation-input');    
-    playerCreateButton.classList.add('creation-button');    
-
-    updatePlayerInput();    
-    playerCreateButton.textContent = "Submit";
-
-    playerCreationDOM.appendChild(playerCreateLabel);
-    playerCreationDOM.appendChild(playerCreateInput);
-    playerCreationDOM.appendChild(playerCreateButton);    
-
-    playerCreateButton.onclick = function(){
-      players.push(playerCreateInput.value);
-      playerCounter++;
-      updatePlayerInput();
-      playerCreateInput.value = '';
-      if (playerCounter === playerAmount + 1) {
-        playerCreationDOM.innerHTML = '';
-      }
-    };
-    return players;
-  }
 
   const updateScreen = () => {
     boardDOM.textContent = '';
@@ -232,6 +199,43 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
 
   boardDOM.addEventListener('click', buttonClickHandler);  
 
-  createPlayers(2);
   updateScreen();
 })();
+
+
+
+// NOT WORKING FUNCTION TO CHANGE PLAYER NAMES
+
+// (function createPlayers () {
+//   let playerCounter = 1;
+//   const playerAmount = 2;
+//   let players = [];
+//   const playerCreateLabel = document.createElement('label');
+//   const playerCreateInput = document.createElement('input');
+//   const playerCreateButton = document.createElement('button');
+//   const updatePlayerInput = () => {
+//     playerCreateLabel.textContent = `Player ${playerCounter}'s name:`;
+//   };
+
+//   playerCreateLabel.classList.add('creation-label');
+//   playerCreateInput.classList.add('creation-input');    
+//   playerCreateButton.classList.add('creation-button');    
+
+//   updatePlayerInput();    
+//   playerCreateButton.textContent = "Submit";
+
+//   playerCreationDOM.appendChild(playerCreateLabel);
+//   playerCreationDOM.appendChild(playerCreateInput);
+//   playerCreationDOM.appendChild(playerCreateButton);    
+
+//   playerCreateButton.onclick = function(){
+//     players.push(playerCreateInput.value);
+//     playerCounter++;
+//     updatePlayerInput();
+//     playerCreateInput.value = '';
+//     if (playerCounter === playerAmount + 1) {
+//       playerCreationDOM.innerHTML = '';
+//     }
+//   };
+//   game = GameControllerModule(players[0], players[1]);
+// })();
