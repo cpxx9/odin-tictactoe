@@ -136,6 +136,7 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
   const game = GameControllerModule();
   const boardDOM = document.querySelector('.board');
   const turnDOM = document.querySelector('.turn');
+  const resetDOM = document.querySelector('.reset');
 
   const updateScreen = () => {
     boardDOM.textContent = '';
@@ -175,12 +176,28 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
       buttons.forEach((button) => {
         button.disabled = true;
       });
+
       if (outcome === 'tie') {
         turnDOM.textContent = "It's a tie!";
       } else if (outcome === 'win') {
         const winner = game.getActivePlayer();
         turnDOM.textContent = `${winner._name} wins!`;
       }
+
+      const restartButton = document.createElement('button');
+      restartButton.classList.add('restart-btn');
+      restartButton.classList.add('reset-btns');
+      restartButton.textContent = "New players?";
+      restartButton.addEventListener('click', restartClickHandler);
+
+      const rematchButton = document.createElement('button');
+      rematchButton.classList.add('rematch-btn');
+      rematchButton.classList.add('reset-btns');
+      rematchButton.textContent = "Rematch?";
+      rematchButton.addEventListener('click', rematchClickHandler);
+      
+      resetDOM.appendChild(rematchButton);
+      resetDOM.appendChild(restartButton);
     }
   };
 
@@ -194,6 +211,14 @@ function GameControllerModule(playerOneName = "Player One", playerTwoName = "Pla
     updateScreen();
 
     endGame(round);
+  }
+
+  function rematchClickHandler() {
+    console.log('test');
+  }
+
+  function restartClickHandler() {
+    console.log('test');
   }
 
   boardDOM.addEventListener('click', buttonClickHandler);  
