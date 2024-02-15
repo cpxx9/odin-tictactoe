@@ -54,6 +54,11 @@ a:hover {
   opacity: .8;
 }
 
+.cell:disabled {
+  opacity: .6;
+  background-color: #FF5143;
+}
+
 /*FOOTER
 ------------------------------*/
 footer a {
