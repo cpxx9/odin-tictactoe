@@ -33,6 +33,25 @@ a:hover {
   grid-template-rows: repeat(3, 1fr);
   width: 500px;
   height: 500px;
+  gap: 10px;
+  background-color: #555;
+}
+
+.cell {
+  border: none;
+  background-color: #f4f4f4;
+}
+
+.x-cell {
+  background-color: #222;
+}
+
+.o-cell {
+  background-color: #555;
+}
+
+.cell:hover {
+  opacity: .8;
 }
 
 /*FOOTER

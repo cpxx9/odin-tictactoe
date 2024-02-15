@@ -188,12 +188,12 @@ function GameControllerModule(
         const cellMarker = cell.getValue();
         switch (cellMarker) {
           case 1:
-            gameButton.textContent = "X";
+            gameButton.classList.add("x-cell");
             break;
           case 2:
-            gameButton.textContent = "O";
+            gameButton.classList.add("o-cell");
             break;
-            defualt: gameButton.textContent = "";
+            defualt: gameButton.classList.remove("o-cell", "x-cell");
         }
 
         boardDOM.appendChild(gameButton);
