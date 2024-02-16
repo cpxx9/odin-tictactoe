@@ -10,8 +10,6 @@
   --emp-color: #3a5a40;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Protest+Strike");
-
 body{
 	background-color: var(--bg-color);
 	color: var(--main-color);
@@ -95,7 +93,18 @@ color: var(--emp-color);
   font-size: 20px;
   border-radius: 15px;
   padding-left: 12px;
+  background-color: var(--btn-color);
+  border: none;
 }
+
+.creation-button,
+.reset-btns {
+  font-size: 20px;  
+  border-radius: 8px;
+  border: none;
+  background-color: var(--btn-color);
+}
+
 
 .x-cell::before,
 .x-cell::after {
