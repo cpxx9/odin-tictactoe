@@ -1,6 +1,18 @@
+:root {
+  --board-size: 30vw;
+  --mark-size: 110px;
+
+  /* Color Palette */
+  --bg-color: #a3b18a;
+  --main-color: #344e41;
+  --highlight-color: #588157;
+  --btn-color: #dad7cd;
+  --emp-color: #3a5a40;
+}
+
 body{
-	background-color: #f4f4f4;
-	color: #555;
+	background-color: var(--bg-color);
+	color: var(--main-color);
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.6em;
@@ -8,6 +20,7 @@ body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 a {
@@ -18,21 +31,192 @@ a:hover {
 	color: #bcaa96;
 	text-decoration: none;
 }
- main {
-  flex: 1;
+main {
+flex: 1;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+h1 {
+font-family: "Protest Strike", sans-serif;
+letter-spacing: .1em;
+font-size: 3.7rem;
+color: var(--emp-color);
+}
+
+.container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
- }
- 
+  gap: 12px;
+}
+
 /*GAMEBOARD
 ------------------------------*/
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  width: 500px;
-  height: 500px;
+  width: var(--board-size);
+  height: var(--board-size);
+  gap: 16px;
+  background-color: var(--highlight-color);
+  border-radius: 8px;
+}
+
+.cell {
+  border: none;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.turn,
+.player-creation {
+  font-size: 28px;
+}
+
+.player-creation {  
+  display: flex;
+  align-items: center;
+}
+
+.creation-label,
+.creation-input {
+  margin-right: 8px;
+}
+
+.creation-input,
+.creation-input:active {
+  font-size: 20px;
+  border-radius: 15px;
+  padding-left: 12px;
+  background-color: var(--btn-color);
+  border: 1px solid var(--highlight-color);
+  outline: none;
+}
+
+.creation-button,
+.reset-btns {
+  font-size: 20px;  
+  border-radius: 8px;
+  border: 1px solid var(--highlight-color);
+  background-color: var(--btn-color);
+  color: var(--main-color);
+}
+
+.reset {
+  display: flex;
+  gap: 6px;
+}
+
+.submit-btn {
+  margin-right: 3px;
+}
+
+.x-cell::before,
+.x-cell::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--mark-size) * .15);
+  height: var(--mark-size);
+  background-color: var(--btn-color);
+}
+
+.x-cell::before {
+  transform: rotate(45deg);
+}
+
+.x-cell::after {
+  transform: rotate(-45deg);
+}
+
+.o-cell::before,
+.o-cell::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.o-cell::before {
+  width: calc(var(--mark-size) * .9);
+  height: calc(var(--mark-size) * .9);
+  background-color: var(--btn-color);
+}
+
+.o-cell::after {
+  width: calc(var(--mark-size) * .60);
+  height: calc(var(--mark-size) * .60);;
+  background-color: var(--bg-color);
+}
+
+.o-cell:disabled::after {
+  opacity: .6;
+}
+
+.cell:hover {
+  opacity: .8;
+}
+
+.cell:disabled {
+  opacity: .6;
+}
+
+@media screen and (max-width:559px) {
+	:root {
+    --board-size: 80vw;
+    --mark-size: 85px;
+  }
+
+  .cell {
+    border: 0px;
+  }
+
+  .player-creation {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .creation-label {
+    font-size: 1.3rem;
+  }
+
+  .creation-input {
+    width: 40vw;
+  }
+}
+
+@media screen and (min-width:560px) and (max-width: 1040px) {
+  :root {
+    --board-size: 80vw;
+  }
+
+  h1 {
+    font-size: 5.1rem;
+  }
+
+  .turn,
+  .player-creation {
+    font-size: 30px;
+  }
+
+  .creation-button,
+  .reset-btns {
+    font-size: 1.7rem;
+  }
+
+  .player-creation {
+    margin: 0px 30px;
+  }
+
+  .creation-input {
+    font-size: 27px;
+  }
+
 }
 
 /*FOOTER
