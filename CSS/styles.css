@@ -166,6 +166,13 @@ color: var(--emp-color);
   opacity: .6;
 }
 
+.creation-button:hover,
+.reset-btns:hover,
+.creation-button:disabled,
+.reset-btns:disabled {
+  opacity: .6;
+}
+
 @media screen and (max-width:559px) {
 	:root {
     --board-size: 80vw;
