@@ -250,6 +250,7 @@ function GameControllerModule(
 
     playerCreateLabel.classList.add("creation-label");
     playerCreateInput.classList.add("creation-input");
+    cancelButton.classList.add("creation-input");
     playerCreateButton.classList.add("creation-button");
 
     updatePlayerInput();

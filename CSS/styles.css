@@ -1,12 +1,20 @@
 :root {
-  --board-size: calc(40vw);
-  --cell-size: calc(var(--board-size / 3));
+  --board-size: calc(30vw);
   --mark-size: 110px;
+
+  /* Color Palette */
+  --bg-color: #a3b18a;
+  --main-color: #344e41;
+  --highlight-color: #588157;
+  --btn-color: #dad7cd;
+  --emp-color: #3a5a40;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Protest+Strike");
+
 body{
-	background-color: #f4f4f4;
-	color: #555;
+	background-color: var(--bg-color);
+	color: var(--main-color);
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.6em;
@@ -14,6 +22,7 @@ body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 a {
@@ -24,13 +33,28 @@ a:hover {
 	color: #bcaa96;
 	text-decoration: none;
 }
- main {
-  flex: 1;
+main {
+flex: 1;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+h1 {
+font-family: "Protest Strike", sans-serif;
+letter-spacing: .1em;
+font-size: 3.7rem;
+color: var(--emp-color);
+}
+
+.container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
- }
- 
+  gap: 12px;
+}
+
 /*GAMEBOARD
 ------------------------------*/
 .board {
@@ -40,16 +64,37 @@ a:hover {
   width: var(--board-size);
   height: var(--board-size);
   gap: 16px;
-  background-color: #555;
+  background-color: var(--highlight-color);
 }
 
 .cell {
   border: none;
-  background-color: #f4f4f4;
+  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.turn,
+.player-creation {
+  font-size: 28px;
+}
+
+.player-creation {  
+  display: flex;
+  align-items: center;
+}
+
+.creation-label,
+.creation-input {
+  margin-right: 8px;
+}
+
+.creation-input {
+  font-size: 20px;
+  border-radius: 15px;
+  padding-left: 12px;
 }
 
 .x-cell::before,
@@ -58,7 +103,7 @@ a:hover {
   position: absolute;
   width: calc(var(--mark-size) * .15);
   height: var(--mark-size);
-  background-color: black;
+  background-color: var(--btn-color);
 }
 
 .x-cell::before {
@@ -77,19 +122,19 @@ a:hover {
 }
 
 .o-cell::before {
-  width: var(--mark-size);
-  height: var(--mark-size);
-  background-color: black;
+  width: calc(var(--mark-size) * .9);
+  height: calc(var(--mark-size) * .9);
+  background-color: var(--btn-color);
 }
 
 .o-cell::after {
-  width: calc(var(--mark-size) * .75);
-  height: calc(var(--mark-size) * .75);;
-  background-color: white;
+  width: calc(var(--mark-size) * .60);
+  height: calc(var(--mark-size) * .60);;
+  background-color: var(--bg-color);
 }
 
 .o-cell:disabled::after {
-  background-color: #FF5143;
+  opacity: .6;
 }
 
 .cell:hover {
@@ -98,7 +143,17 @@ a:hover {
 
 .cell:disabled {
   opacity: .6;
-  background-color: #FF5143;
+}
+
+@media screen and (max-width:559px) {
+	:root {
+    --board-size: calc(80vw);
+    --mark-size: 85px;
+  }
+
+  .cell {
+    border: 0px;
+  }
 }
 
 /*FOOTER
