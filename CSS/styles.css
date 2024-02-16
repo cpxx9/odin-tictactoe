@@ -1,5 +1,5 @@
 :root {
-  --board-size: calc(30vw);
+  --board-size: 30vw;
   --mark-size: 110px;
 
   /* Color Palette */
@@ -63,6 +63,7 @@ color: var(--emp-color);
   height: var(--board-size);
   gap: 16px;
   background-color: var(--highlight-color);
+  border-radius: 8px;
 }
 
 .cell {
@@ -89,22 +90,33 @@ color: var(--emp-color);
   margin-right: 8px;
 }
 
-.creation-input {
+.creation-input,
+.creation-input:active {
   font-size: 20px;
   border-radius: 15px;
   padding-left: 12px;
   background-color: var(--btn-color);
-  border: none;
+  border: 1px solid var(--highlight-color);
+  outline: none;
 }
 
 .creation-button,
 .reset-btns {
   font-size: 20px;  
   border-radius: 8px;
-  border: none;
+  border: 1px solid var(--highlight-color);
   background-color: var(--btn-color);
+  color: var(--main-color);
 }
 
+.reset {
+  display: flex;
+  gap: 6px;
+}
+
+.submit-btn {
+  margin-right: 3px;
+}
 
 .x-cell::before,
 .x-cell::after {
@@ -156,13 +168,55 @@ color: var(--emp-color);
 
 @media screen and (max-width:559px) {
 	:root {
-    --board-size: calc(80vw);
+    --board-size: 80vw;
     --mark-size: 85px;
   }
 
   .cell {
     border: 0px;
   }
+
+  .player-creation {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .creation-label {
+    font-size: 1.3rem;
+  }
+
+  .creation-input {
+    width: 40vw;
+  }
+}
+
+@media screen and (min-width:560px) and (max-width: 1040px) {
+  :root {
+    --board-size: 80vw;
+  }
+
+  h1 {
+    font-size: 5.1rem;
+  }
+
+  .turn,
+  .player-creation {
+    font-size: 30px;
+  }
+
+  .creation-button,
+  .reset-btns {
+    font-size: 1.7rem;
+  }
+
+  .player-creation {
+    margin: 0px 30px;
+  }
+
+  .creation-input {
+    font-size: 27px;
+  }
+
 }
 
 /*FOOTER
